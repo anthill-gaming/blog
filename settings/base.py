@@ -27,7 +27,7 @@ LOCALE_PATH = os.path.join(BASE_DIR, 'locale')
 # APPLICATION_CLASS = 'blog.apps.AnthillApplication'
 APPLICATION_NAME = 'blog'
 APPLICATION_VERBOSE_NAME = _('Blog')
-APPLICATION_DESCRIPTION = _('Service description')
+APPLICATION_DESCRIPTION = _('Delivers news and patch notes feeds to the users')
 APPLICATION_ICON_CLASS = 'icon-feed'
 APPLICATION_COLOR = 'pink'
 
