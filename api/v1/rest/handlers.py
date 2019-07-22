@@ -28,10 +28,8 @@ class PostListHandler(ListHandler):
     model = Post
 
 
-class CategoryPostListHandler(ListHandler):
+class CategoryPostListHandler(PostListHandler):
     """Get list of posts belongs to some category."""
-    model = Post
-
     def get_queryset(self):
         queryset = super().get_queryset()
         queryset = queryset.filter_by(category_id=self.path_kwargs['id'])
