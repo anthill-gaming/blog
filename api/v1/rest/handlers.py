@@ -7,25 +7,13 @@ from blog.models import Post, Category
 
 class PostHandler(CreatingMixin, UpdatingMixin, DeletionMixin, DetailMixin,
                   ModelFormHandler):
-    """
-    Multiple operations with posts:
-        fetching, creating, updating and deleting.
-    """
-    model = Post
-
-    def get_form_class(self):
-        """Return the form class to use in this handler."""
-        form_class = super().get_form_class()
-        if self.request.method in ('PUT',):  # Updating
-            # Patching form meta
-            setattr(form_class.Meta, 'all_fields_optional', True)
-            setattr(form_class.Meta, 'assign_required', False)
-        return form_class
+    """Multiple operations with posts."""
+    queryset = Post.query.filter_by(active=True)
 
 
 class PostListHandler(ListHandler):
     """Get list of posts."""
-    model = Post
+    queryset = Post.query.filter_by(active=True)
 
 
 class CategoryPostListHandler(PostListHandler):
@@ -38,20 +26,8 @@ class CategoryPostListHandler(PostListHandler):
 
 class CategoryHandler(CreatingMixin, UpdatingMixin, DeletionMixin, DetailMixin,
                       ModelFormHandler):
-    """
-    Multiple operations with post categories:
-        fetching, creating, updating and deleting.
-    """
+    """Multiple operations with post categories."""
     model = Category
-
-    def get_form_class(self):
-        """Return the form class to use in this handler."""
-        form_class = super().get_form_class()
-        if self.request.method in ('PUT',):  # Updating
-            # Patching form meta
-            setattr(form_class.Meta, 'all_fields_optional', True)
-            setattr(form_class.Meta, 'assign_required', False)
-        return form_class
 
 
 class CategoryListHandler(ListHandler):
