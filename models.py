@@ -13,11 +13,18 @@ class Post(db.Model):
     content = db.Column(db.Text, nullable=False)
     enabled = db.Column(db.Boolean, nullable=False, default=True)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
-    # image = db.Column(db.ImageType(width=None, height=None))
+    image = db.Column(db.ImageType(width=None, height=None))
 
     @hybrid_property
     def active(self):
         return self.enabled and self.created <= timezone.now()
+
+    @active.expression
+    def active(cls) -> bool:
+        return db.and_(
+            cls.created <= timezone.now(),
+            cls.enabled
+        )
 
 
 class Category(db.Model):
