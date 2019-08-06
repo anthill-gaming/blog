@@ -35,3 +35,6 @@ class Category(db.Model):
     description = db.Column(db.String(512), nullable=False)
     posts = db.relationship('Post', backref='category', lazy='dynamic')
 
+    def __repr__(self):
+        return '<Category(name=%s)>' % self.name
+
